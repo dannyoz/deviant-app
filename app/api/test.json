@@ -1,0 +1,12 @@
+{
+	"appName" : "React ES6 boilerplate",
+	"tech" : [
+		"Node",
+		"Express",
+		"Swig",
+		"Gulp",
+		"React",
+		"Super Agent",
+		"@includes"
+	]
+}

@@ -1,0 +1,7 @@
+{
+	"routes" : [{
+		"path" : "/",
+		"view" : "home",
+		"title" : "The home Page"
+	}]
+}
