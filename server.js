@@ -65,8 +65,13 @@ superAgent.get(url).end(function(err, response){
 
 app.get('/api/deviantart/token',function(req,res){
 
-	res.setHeader('Content-Type', 'application/json');
-    res.send(token);
+	superAgent.get(url).end(function(err, response){
+		var tokenData = response.body;
+
+		res.setHeader('Content-Type', 'application/json');
+    	res.send(tokenData);
+
+	});
 });
 
 app.get('/api/deviantart/data',function(req,res){

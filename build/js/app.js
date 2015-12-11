@@ -15,12 +15,6 @@ var _servicesApiService = require('./services/apiService');
 
 var _servicesApiService2 = _interopRequireDefault(_servicesApiService);
 
-var _node_modulesSuperagentLibClient = require("../node_modules/superagent/lib/client");
-
-var _node_modulesSuperagentLibClient2 = _interopRequireDefault(_node_modulesSuperagentLibClient);
-
-var jsonp = require('superagent-jsonp');
-
 var Home = _node_modulesReactReact2["default"].createClass({
 	displayName: "Home",
 
@@ -33,20 +27,17 @@ var Home = _node_modulesReactReact2["default"].createClass({
 
 	componentDidMount: function componentDidMount() {
 
-		// this.api = new apiService();
-		// this.api.request('/api/test')
-		// 	.end(function(err, response){
+		this.api = new _servicesApiService2["default"]();
+		this.api.request('/api/test').end((function (err, response) {
 
-		// 	    this.setState({
-		// 	    	appName : response.body.appName,
-		// 			techStack : response.body.tech
-		// 	    });
+			this.setState({
+				appName: response.body.appName,
+				techStack: response.body.tech
+			});
+		}).bind(this));
 
-		// 	}.bind(this));
-
-		_node_modulesSuperagentLibClient2["default"].get('https://www.deviantart.com/oauth2/token?client_id=4044&client_secret=4570f8cf16d7c63d137f25d4a6fc5aca&grant_type=client_credentials').withCredentials().end(function (err, response) {
-
-			console.log(response);
+		this.api.request('/api/deviantart/token').end(function (err, response) {
+			console.log(response.body);
 		});
 	},
 	render: function render() {
@@ -82,7 +73,7 @@ if (HeaderComponent) {
 	_node_modulesReactReact2["default"].render(_node_modulesReactReact2["default"].createElement(_viewsComponentsHeaderHeader2["default"], null), HeaderComponent);
 };
 
-},{"../node_modules/react/react":159,"../node_modules/superagent/lib/client":161,"./services/apiService":2,"./views/components/header/header":3,"superagent-jsonp":160}],2:[function(require,module,exports){
+},{"../node_modules/react/react":159,"./services/apiService":2,"./views/components/header/header":3}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -117,7 +108,7 @@ var apiService = (function () {
 exports["default"] = apiService;
 module.exports = exports["default"];
 
-},{"../../node_modules/superagent/lib/client":161}],3:[function(require,module,exports){
+},{"../../node_modules/superagent/lib/client":160}],3:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17849,74 +17840,6 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":32}],160:[function(require,module,exports){
-'use strict';
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
-  } else {
-    obj[key] = value;
-  }return obj;
-}
-
-var serialise = function serialise(obj) {
-  if (typeof obj != 'object') return obj;
-  var pairs = [];
-  for (var key in obj) {
-    if (null != obj[key]) {
-      pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]));
-    }
-  }
-  return pairs.join('&');
-};
-
-var jsonp = function jsonp(request) {
-  // In case this is in nodejs, run without modifying request
-  if (typeof window == 'undefined') return request;
-
-  request.end = end.bind(request);
-  return request;
-};
-
-var callbackWrapper = function callbackWrapper(data) {
-  var err = null;
-  var res = {
-    body: data
-  };
-
-  this._jsonp.callback.call(this, err, res);
-};
-
-var end = function end(callback) {
-  this._jsonp = {
-    callbackParam: 'callback',
-    callbackName: 'superagentCallback' + new Date().valueOf() + parseInt(Math.random() * 1000),
-    callback: callback
-  };
-
-  window[this._jsonp.callbackName] = callbackWrapper.bind(this);
-
-  var params = _defineProperty({}, this._jsonp.callbackParam, this._jsonp.callbackName);
-
-  this._query.push(serialise(params));
-  var queryString = this._query.join('&');
-
-  var s = document.createElement('script');
-  var separator = this.url.indexOf('?') > -1 ? '&' : '?';
-  var url = this.url + separator + queryString;
-
-  s.src = url;
-  document.getElementsByTagName('head')[0].appendChild(s);
-};
-
-// Prefer node/browserify style requires
-if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-  module.exports = jsonp;
-} else if (typeof window !== 'undefined') {
-  window.superagentJSONP = jsonp;
-}
-
-},{}],161:[function(require,module,exports){
 /**
  * Module dependencies.
  */
@@ -19054,7 +18977,7 @@ request.put = function (url, data, fn) {
 
 module.exports = request;
 
-},{"emitter":162,"reduce":163}],162:[function(require,module,exports){
+},{"emitter":161,"reduce":162}],161:[function(require,module,exports){
 
 /**
  * Expose `Emitter`.
@@ -19217,7 +19140,7 @@ Emitter.prototype.hasListeners = function (event) {
   return !!this.listeners(event).length;
 };
 
-},{}],163:[function(require,module,exports){
+},{}],162:[function(require,module,exports){
 
 /**
  * Reduce `arr` with `fn`.
