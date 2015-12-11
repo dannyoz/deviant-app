@@ -1,0 +1,143 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'node',
+1 verbose cli   'libcurl',
+1 verbose cli   '--save-dev' ]
+2 info using npm@1.4.23
+3 info using node@v0.10.31
+4 verbose node symlink C:\Program Files\nodejs\\node.exe
+5 verbose readDependencies using package.json deps
+6 verbose cache add [ 'node', null ]
+7 verbose cache add name=undefined spec="node" args=["node",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'node',
+8 verbose parsed url   path: 'node',
+8 verbose parsed url   href: 'node' }
+9 verbose cache add [ 'libcurl', null ]
+10 verbose cache add name=undefined spec="libcurl" args=["libcurl",null]
+11 verbose parsed url { protocol: null,
+11 verbose parsed url   slashes: null,
+11 verbose parsed url   auth: null,
+11 verbose parsed url   host: null,
+11 verbose parsed url   port: null,
+11 verbose parsed url   hostname: null,
+11 verbose parsed url   hash: null,
+11 verbose parsed url   search: null,
+11 verbose parsed url   query: null,
+11 verbose parsed url   pathname: 'libcurl',
+11 verbose parsed url   path: 'libcurl',
+11 verbose parsed url   href: 'libcurl' }
+12 silly lockFile f8e966d1-node node
+13 verbose lock node C:\Users\Dan\AppData\Roaming\npm-cache\f8e966d1-node.lock
+14 silly lockFile e9786ecf-libcurl libcurl
+15 verbose lock libcurl C:\Users\Dan\AppData\Roaming\npm-cache\e9786ecf-libcurl.lock
+16 silly lockFile e9786ecf-libcurl libcurl
+17 silly lockFile e9786ecf-libcurl libcurl
+18 silly lockFile f8e966d1-node node
+19 silly lockFile f8e966d1-node node
+20 verbose addNamed [ 'libcurl', '' ]
+21 verbose addNamed [ null, '*' ]
+22 silly lockFile a28f2df0-libcurl libcurl@
+23 verbose lock libcurl@ C:\Users\Dan\AppData\Roaming\npm-cache\a28f2df0-libcurl.lock
+24 verbose addNamed [ 'node', '' ]
+25 verbose addNamed [ null, '*' ]
+26 silly lockFile bccd7aa1-node node@
+27 verbose lock node@ C:\Users\Dan\AppData\Roaming\npm-cache\bccd7aa1-node.lock
+28 silly addNameRange { name: 'libcurl', range: '*', hasData: false }
+29 silly addNameRange { name: 'node', range: '*', hasData: false }
+30 verbose request where is /libcurl
+31 verbose request registry https://registry.npmjs.org/
+32 verbose request id bf9ce4fad63b1a89
+33 verbose url raw /libcurl
+34 verbose url resolving [ 'https://registry.npmjs.org/', './libcurl' ]
+35 verbose url resolved https://registry.npmjs.org/libcurl
+36 verbose request where is https://registry.npmjs.org/libcurl
+37 info trying registry request attempt 1 at 23:36:20
+38 http GET https://registry.npmjs.org/libcurl
+39 verbose request where is /node
+40 verbose request registry https://registry.npmjs.org/
+41 verbose url raw /node
+42 verbose url resolving [ 'https://registry.npmjs.org/', './node' ]
+43 verbose url resolved https://registry.npmjs.org/node
+44 verbose request where is https://registry.npmjs.org/node
+45 info trying registry request attempt 1 at 23:36:20
+46 http GET https://registry.npmjs.org/node
+47 http 200 https://registry.npmjs.org/node
+48 silly registry.get cb [ 200,
+48 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+48 silly registry.get     etag: '"4RB0I162TMBFF7IWMPCBRMD3L"',
+48 silly registry.get     'content-type': 'application/json',
+48 silly registry.get     'cache-control': 'max-age=300',
+48 silly registry.get     'content-length': '1084',
+48 silly registry.get     'accept-ranges': 'bytes',
+48 silly registry.get     date: 'Thu, 10 Dec 2015 23:36:26 GMT',
+48 silly registry.get     via: '1.1 varnish',
+48 silly registry.get     age: '0',
+48 silly registry.get     connection: 'keep-alive',
+48 silly registry.get     'x-served-by': 'cache-lhr6332-LHR',
+48 silly registry.get     'x-cache': 'MISS',
+48 silly registry.get     'x-cache-hits': '0',
+48 silly registry.get     'x-timer': 'S1449790585.873697,VS0,VE202',
+48 silly registry.get     vary: 'Accept' } ]
+49 silly addNameRange number 2 { name: 'node', range: '*', hasData: true }
+50 silly addNameRange versions [ 'node', [ '0.0.0' ] ]
+51 verbose addNamed [ 'node', '0.0.0' ]
+52 verbose addNamed [ '0.0.0', '0.0.0' ]
+53 silly lockFile c321b6ea-node-0-0-0 node@0.0.0
+54 verbose lock node@0.0.0 C:\Users\Dan\AppData\Roaming\npm-cache\c321b6ea-node-0-0-0.lock
+55 warn deprecated node@0.0.0: To update or install node, go to http://nodejs.org/
+56 silly lockFile 5a02160b-ry-npmjs-org-node-node-0-0-0-tgz https://registry.npmjs.org/node/-/node-0.0.0.tgz
+57 verbose lock https://registry.npmjs.org/node/-/node-0.0.0.tgz C:\Users\Dan\AppData\Roaming\npm-cache\5a02160b-ry-npmjs-org-node-node-0-0-0-tgz.lock
+58 verbose addRemoteTarball [ 'https://registry.npmjs.org/node/-/node-0.0.0.tgz',
+58 verbose addRemoteTarball   '288d62f90530c763eff8d4831ee7343ab3d60793' ]
+59 info retry fetch attempt 1 at 23:36:20
+60 verbose fetch to= C:\Users\Dan\AppData\Local\Temp\npm-6064-FZsi8Q0K\registry.npmjs.org\node\-\node-0.0.0.tgz
+61 http GET https://registry.npmjs.org/node/-/node-0.0.0.tgz
+62 http 200 https://registry.npmjs.org/node/-/node-0.0.0.tgz
+63 silly lockFile 5a02160b-ry-npmjs-org-node-node-0-0-0-tgz https://registry.npmjs.org/node/-/node-0.0.0.tgz
+64 silly lockFile 5a02160b-ry-npmjs-org-node-node-0-0-0-tgz https://registry.npmjs.org/node/-/node-0.0.0.tgz
+65 silly lockFile c321b6ea-node-0-0-0 node@0.0.0
+66 silly lockFile c321b6ea-node-0-0-0 node@0.0.0
+67 silly lockFile bccd7aa1-node node@
+68 silly lockFile bccd7aa1-node node@
+69 http 404 https://registry.npmjs.org/libcurl
+70 silly registry.get cb [ 404,
+70 silly registry.get   { 'content-type': 'application/json',
+70 silly registry.get     'cache-control': 'max-age=0',
+70 silly registry.get     'content-length': '2',
+70 silly registry.get     'accept-ranges': 'bytes',
+70 silly registry.get     date: 'Thu, 10 Dec 2015 23:36:26 GMT',
+70 silly registry.get     via: '1.1 varnish',
+70 silly registry.get     age: '0',
+70 silly registry.get     connection: 'keep-alive',
+70 silly registry.get     'x-served-by': 'cache-lhr6329-LHR',
+70 silly registry.get     'x-cache': 'MISS',
+70 silly registry.get     'x-cache-hits': '0',
+70 silly registry.get     'x-timer': 'S1449790585.872143,VS0,VE682' } ]
+71 silly lockFile a28f2df0-libcurl libcurl@
+72 silly lockFile a28f2df0-libcurl libcurl@
+73 error 404 Not Found
+73 error 404
+73 error 404 'libcurl' is not in the npm registry.
+73 error 404 You should bug the author to publish it
+73 error 404 It was specified as a dependency of 'application-name'
+73 error 404
+73 error 404 Note that you can also install from a
+73 error 404 tarball, folder, or http url, or git url.
+74 error System Windows_NT 6.0.6001
+75 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "node" "libcurl" "--save-dev"
+76 error cwd C:\repositories\deviant-app
+77 error node -v v0.10.31
+78 error npm -v 1.4.23
+79 error code E404
+80 verbose exit [ 1, true ]
