@@ -1,41 +1,3 @@
-//DEVIANT ART...
-
-// var token        = {},
-// 	deviantart   = {},
-// 	path         = 'https://www.deviantart.com/oauth2/token',
-// 	appId        = '?client_id=4044',
-// 	clientSecret = '&client_secret=4570f8cf16d7c63d137f25d4a6fc5aca',
-// 	type         = '&grant_type=client_credentials',
-// 	url          = path+appId+clientSecret+type;
-
-// superAgent.get(url).end(function(err, response){
-// 	token = response.body;
-
-// 	superAgent.get('https://www.deviantart.com/api/v1/oauth2/gallery/?username=danosborne&mode=popular&mature_content=true&access_token=' + token.access_token)
-// 		.end(function(err, response){
-// 			deviantart = response.body;
-// 	});
-// });
-
-
-// app.get('/api/deviantart/token',function(req,res){
-
-// 	superAgent.get(url).end(function(err, response){
-// 		var tokenData = response.body;
-
-// 		res.setHeader('Content-Type', 'application/json');
-//     	res.send(tokenData);
-
-// 	});
-// });
-
-// app.get('/api/deviantart/data',function(req,res){
-
-// 	res.setHeader('Content-Type', 'application/json');
-//     res.send(deviantart);
-// });
-
-
 var HTTP      = require('superAgent');
 var Q         = require('q');
 var auth      = {};
@@ -58,21 +20,11 @@ var deviantart = (function(){
 		})
 		.then(getGallery)
 		.then(function(data){
-
-			var hasMore = data.has_more,
-				offset  = data.next_offset,
-				results = data.results;
-
-			items = results;
-
+			items = data
 		})
 		.then(getPosts)
 		.then(getStats)
 		.done();
-	},
-
-	run = function(){
-
 	},
 
 	request = function(url){
@@ -125,21 +77,35 @@ var deviantart = (function(){
 		return request(url);
 	},
 
-	getGallery = function(offset){
+	getGallery = function(){
+
+		var deferred = Q.defer();
 
 		var path    = 'https://www.deviantart.com/api/v1/oauth2/gallery/?username=',
-			user    = 'danosborne',
-			paging  = (offset) ? '&offset=' + offset : '&offset=0',
+			user    = 'danosborne',	
 			queries = '&mode=newest&mature_content=true&access_token=',
-			token   = auth.access_token,
-			url     = path+user+paging+queries+token;
-
+			token   = auth.access_token;
+			
 		var pages     = [],
 			count     = userData.stats.user_deviations,
 			pageCount = (count%10)-1;
 
+		for (var i = 0; i<pageCount; i++){
 
-		return request(url);
+			var paging = '&offset=' + (i*10),
+				url    = path+user+paging+queries+token;
+		
+			request(url).then(function(data){
+				pages.push(data.results)		
+
+				if(pages.length == pageCount){
+
+					deferred.resolve(pages)
+				}
+			});
+		}
+
+		return deferred.promise;
 	},
 
 	getPosts = function(){
@@ -150,6 +116,8 @@ var deviantart = (function(){
 	},
 
 	getStats = function(){
+
+		////http://backend.deviantart.com/oembed?url=http://danosborne.deviantart.com/art/Zombie-Simpsons-Krusty-the-clown-387294156
 
 		console.log(4)
 		return timer(1000);
