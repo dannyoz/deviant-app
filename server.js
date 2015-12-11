@@ -7,9 +7,10 @@ var port = 4000;
 var server = app.listen(port);
 var routeData = require('./app/routes.json');
 var superAgent = require('superAgent');
+var deviantArt = require('./server/deviantArt');
 
-
-
+// Get deviant art data
+deviantArt.run();
 
 
 //Templating settings
@@ -40,44 +41,5 @@ app.get('/api/:route',function(req,res){
     res.send(JSON.stringify(json));
 });
 
-
-
-
-//DEVIANT ART...
-
-var token        = {},
-	deviantart   = {},
-	path         = 'https://www.deviantart.com/oauth2/token',
-	appId        = '?client_id=4044',
-	clientSecret = '&client_secret=4570f8cf16d7c63d137f25d4a6fc5aca',
-	type         = '&grant_type=client_credentials',
-	url          = path+appId+clientSecret+type;
-
-superAgent.get(url).end(function(err, response){
-	token = response.body;
-
-	superAgent.get('https://www.deviantart.com/api/v1/oauth2/gallery/?username=danosborne&mode=popular&mature_content=true&access_token=' + token.access_token)
-		.end(function(err, response){
-			deviantart = response.body;
-	});
-});
-
-
-app.get('/api/deviantart/token',function(req,res){
-
-	superAgent.get(url).end(function(err, response){
-		var tokenData = response.body;
-
-		res.setHeader('Content-Type', 'application/json');
-    	res.send(tokenData);
-
-	});
-});
-
-app.get('/api/deviantart/data',function(req,res){
-
-	res.setHeader('Content-Type', 'application/json');
-    res.send(deviantart);
-});
 
 console.log("Express server listening on port ",port);
