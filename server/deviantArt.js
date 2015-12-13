@@ -1,9 +1,19 @@
 var HTTP      = require('superAgent');
+var mongoose  = require('mongoose');
 var Q         = require('q');
 var auth      = {};
 var userData  = {};
 var items     = [];
+var paintings = [];
 
+mongoose.connect('mongodb://localhost/deviantart');
+
+var Schema = new mongoose.Schema({
+	userData  : Object,
+	paintings : Array
+});
+
+var Data = mongoose.model('data',Schema);
 
 var deviantart = (function(){
 	
@@ -22,8 +32,9 @@ var deviantart = (function(){
 		.then(function(data){
 			items = data
 		})
-		.then(getPosts)
+		.then(flatten)
 		.then(getStats)
+		.then(save)
 		.done();
 	},
 
@@ -51,7 +62,6 @@ var deviantart = (function(){
 		},time)
 
 		return deferred.promise;
-
 	},
 
 	authenticate = function(){
@@ -108,19 +118,56 @@ var deviantart = (function(){
 		return deferred.promise;
 	},
 
-	getPosts = function(){
+	flatten = function(){
 
-		console.log(items.length)
+		var pageCount = items.length;
+
+		for (var i = 0; i<pageCount; i++){
+
+			if(i == 0){
+				paintings = items[i];
+			} else {
+				paintings.push.apply(paintings,items[i]);
+			}
+		}
 
 		return timer(400);
 	},
 
 	getStats = function(){
 
-		////http://backend.deviantart.com/oembed?url=http://danosborne.deviantart.com/art/Zombie-Simpsons-Krusty-the-clown-387294156
+		var deferred = Q.defer();
 
-		console.log(4)
-		return timer(1000);
+		var inc = 0;
+
+		var path = 'http://backend.deviantart.com/oembed?url=';
+
+		for (var i = 0; i<paintings.length; i++){
+
+			var paintUrl = paintings[i].url,
+				painting = paintings[i];
+
+			request(path+paintUrl).then(function(data){
+				inc ++
+				painting.statistics = data.community.statistics["_attributes"]
+
+				if(inc == userData.stats.user_deviations){
+					deferred.resolve('done')
+				}
+			});
+		}
+
+		return deferred.promise;
+	},
+
+	save = function(){
+		new Data({
+			userData  : userData,
+			paintings : paintings
+		}).save(function(err,doc){
+			if(err) console.log(err);
+			else console.log('dunnit');
+		})
 	}
 
 	chain();

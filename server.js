@@ -8,9 +8,13 @@ var server = app.listen(port);
 var routeData = require('./app/routes.json');
 var superAgent = require('superAgent');
 var deviantArt = require('./server/deviantArt');
+var mongoose = require('mongoose');
 
 // Get deviant art data
-deviantArt.run();
+// deviantArt.run();
+
+mongoose.connect('mongodb://localhost/deviantart');
+mongoose.model('data',{content: Object});	
 
 
 //Templating settings
@@ -31,6 +35,12 @@ routeData.routes.forEach(function (route){
 		});
 	});
 	
+});
+
+app.get('/api/deviantart/data',function(req,res){
+	mongoose.model('data').find(function(err,data){
+    	res.send(data);
+	});
 });
 
 app.get('/api/:route',function(req,res){
