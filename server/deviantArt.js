@@ -13,10 +13,9 @@ var Schema = new mongoose.Schema({
 	paintings : Array
 });
 
-var Data = mongoose.model('data',Schema);
+var Data = mongoose.model('artdata',Schema);
 
 var deviantart = (function(){
-	
 
 	var chain = function(){
 
@@ -35,7 +34,12 @@ var deviantart = (function(){
 		.then(flatten)
 		.then(getStats)
 		.then(save)
+		.then(console.log('done'))
+		.catch(function (error) {
+		    console.log(error);
+		})
 		.done();
+
 	},
 
 	request = function(url){
@@ -47,7 +51,7 @@ var deviantart = (function(){
 				deferred.reject(new Error(err));
 			} else {
 				deferred.resolve(response.body);
-			}			
+			}
 		});
 
 		return deferred.promise;
@@ -92,10 +96,10 @@ var deviantart = (function(){
 		var deferred = Q.defer();
 
 		var path    = 'https://www.deviantart.com/api/v1/oauth2/gallery/?username=',
-			user    = 'danosborne',	
+			user    = 'danosborne',
 			queries = '&mode=newest&mature_content=true&access_token=',
 			token   = auth.access_token;
-			
+
 		var pages     = [],
 			count     = userData.stats.user_deviations,
 			pageCount = (count%10)-1;
@@ -104,9 +108,9 @@ var deviantart = (function(){
 
 			var paging = '&offset=' + (i*10),
 				url    = path+user+paging+queries+token;
-		
+
 			request(url).then(function(data){
-				pages.push(data.results)		
+				pages.push(data.results)
 
 				if(pages.length == pageCount){
 
@@ -136,13 +140,10 @@ var deviantart = (function(){
 
 	getStats = function(){
 
-		var deferred = Q.defer();
-
 		var inc = 0;
-
 		var path = 'http://backend.deviantart.com/oembed?url=';
 
-		for (var i = 0; i<paintings.length; i++){
+		function get(i) {
 
 			var paintUrl = paintings[i].url,
 				painting = paintings[i];
@@ -150,24 +151,52 @@ var deviantart = (function(){
 			request(path+paintUrl).then(function(data){
 				inc ++
 				painting.statistics = data.community.statistics["_attributes"]
-
-				if(inc == userData.stats.user_deviations){
-					deferred.resolve('done')
-				}
 			});
 		}
 
-		return deferred.promise;
+		for (var i = 0; i<paintings.length; i++){
+			get(i);
+		}
+
+		return timer(5000);
 	},
 
 	save = function(){
-		new Data({
-			userData  : userData,
-			paintings : paintings
-		}).save(function(err,doc){
-			if(err) console.log(err);
-			else console.log('dunnit');
-		})
+
+		var deferred = Q.defer();
+
+		Data.findOne({ 'userData.user.username': 'danosborne' }, function (err, doc){
+
+			if(doc == null){
+				new Data({
+					userData  : userData,
+					paintings : paintings
+				}).save(function(err,doc){
+					if(err) {
+						console.log(err);
+					}
+					else {
+						console.log('saved to db');
+						deferred.resolve('done')
+					}
+				})
+			} else {
+			  doc.userData  = userData;
+				doc.paintings = paintings;
+			  doc.save(function(err,doc){
+					if(err) {
+						console.log(err);
+					}
+					else {
+						console.log('over-written in db');
+						deferred.resolve('done')
+					}
+				})
+			}
+
+		});
+
+		return deferred.promise;
 	}
 
 	chain();

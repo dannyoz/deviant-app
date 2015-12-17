@@ -10,7 +10,7 @@ var Home = React.createClass({
 			techStack : []
 		}
 	},
-	
+
 	componentDidMount () {
 
 		this.api = new apiService();
@@ -25,9 +25,9 @@ var Home = React.createClass({
 			}.bind(this));
 
 
-		this.api.request('/api/deviantart/token')
+		this.api.request('/api/deviantart/data')
 			.end(function(err, response){
-				console.log(response.body);
+				console.log(response.body[0].paintings);
 			});
 
 
@@ -61,4 +61,3 @@ if(HeaderComponent){
 		HeaderComponent
 	);
 };
-
