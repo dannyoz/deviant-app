@@ -1,28 +1,39 @@
-import React from "../../node_modules/react/react";
+import React      from "../../node_modules/react/react";
+import AppActions from '../flux/appActions';
+import Painting   from './painting';
+import HighScores from './highscores';
 
 let MainPanel = React.createClass({
 
-  componentWillReceiveProps (newProps) {
-    console.log(newProps.state.paintings);
+  componentWillReceiveProps(props){
+
+    if(!props.state.hasStats){
+
+      var paintings = props.state.paintings;
+      for(var i = 0; i<paintings.length; i++){
+
+        var stats = paintings[i].statistics;
+        var perc  = (stats.favorites/ stats.views)*100;
+
+        stats.perc = perc;
+
+        AppActions.setStats(stats);
+      };
+
+    }
   },
 
   render () {
 
     var paintings = this.props.state.paintings.map(function(painting){
       return(
-        <div>
-          <p>{painting.title}</p>
-          <ul>
-            <li>Views : {painting.statistics.views}</li>
-            <li>Favourites : {painting.statistics.favorites}</li>
-            <li>Comments : {painting.statistics.comments}</li>
-          </ul>
-        </div>
+        <Painting data={painting}/>
       )
-    });
+    },this);
 
     return(
       <div id="main-panel">
+        <HighScores state={this.props.state}/>
         {paintings}
       </div>
     )
