@@ -1,7 +1,7 @@
 {
 	"routes" : [{
 		"path" : "/",
-		"view" : "home",
-		"title" : "The home Page"
+		"view" : "dashboard",
+		"title" : "CMS Dashboard"
 	}]
 }

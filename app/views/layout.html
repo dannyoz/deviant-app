@@ -9,11 +9,7 @@
 	<link rel="stylesheet" type="text/css" media="all" href="css/styles.css" />
 </head>
   <body>
-    {% include 'header/header.html' %}
     {% block content %}{% endblock %}
-    {% include 'footer/footer.html' %}
   </body>
-  {% block footerScript %}
-		<script src="js/app.js"></script>
-	{% endblock %}
+  {% block footerScript %}{% endblock %}
 </html>
