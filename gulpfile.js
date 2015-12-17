@@ -7,6 +7,10 @@ var sass = require('gulp-sass');
 var minifyCSS = require('gulp-minify-css');
 var server = require('gulp-express');
 
+var scripts = [
+  './app/dashboard.js'
+];
+
 gulp.task('server', function () {
     server.run(['server.js']);
     gulp.watch(['build/**/*.*'], server.notify);
@@ -16,11 +20,11 @@ gulp.task('html', function () {
   gulp.src('./app/index.html',{base: './app'})
     .pipe(gulp.dest('./build/'));
   gulp.src('./app/views/**/*.html',{base: './app'})
-    .pipe(gulp.dest('./build/'));  
+    .pipe(gulp.dest('./build/'));
 });
 
 gulp.task('browserify', function () {
-  gulp.src('./app/app.js', {entry: true})
+  gulp.src(scripts, {entry: true})
     .pipe(browserify({
       transform: ['babelify']
     }))
