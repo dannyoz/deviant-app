@@ -127,26 +127,48 @@ var HighScores = _node_modulesReactReact2["default"].createClass({
   },
 
   componentWillReceiveProps: function componentWillReceiveProps(props) {
-
     if (props.state.comments.length > 0) {
-
-      var comms = props.state.comments;
-      var faves = props.state.favourites;
-      var views = props.state.views;
-      var percs = props.state.percs;
-
-      var mostComms = comms.indexOf(Math.max.apply(Math, comms));
-      var mostViews = views.indexOf(Math.max.apply(Math, views));
-      var mostFaves = faves.indexOf(Math.max.apply(Math, faves));
-      var mostLiked = percs.indexOf(Math.max.apply(Math, percs));
-
-      this.setState({
-        mostComms: props.state.paintings[mostComms],
-        mostViews: props.state.paintings[mostViews],
-        mostFaves: props.state.paintings[mostFaves],
-        mostLiked: props.state.paintings[mostLiked]
-      });
+      this.calulateStats(props);
     }
+  },
+
+  findAverage: function findAverage(arr) {
+    var sum = 0;
+    for (var i = 0; i < arr.length; i++) {
+      sum += arr[i];
+    }
+
+    return sum / arr.length;
+  },
+
+  calulateStats: function calulateStats(props) {
+
+    var comms = props.state.comments;
+    var faves = props.state.favourites;
+    var views = props.state.views;
+    var percs = props.state.percs;
+
+    var mostComms = comms.indexOf(Math.max.apply(Math, comms));
+    var avgComms = this.findAverage(comms);
+    var mostViews = views.indexOf(Math.max.apply(Math, views));
+    var avgViews = this.findAverage(views);
+    var mostFaves = faves.indexOf(Math.max.apply(Math, faves));
+    var avgFaves = this.findAverage(faves);
+    var mostLiked = percs.indexOf(Math.max.apply(Math, percs));
+    var avgLikes = this.findAverage(percs);
+
+    console.log(this.findAverage(comms));
+
+    this.setState({
+      mostComms: props.state.paintings[mostComms],
+      avgComms: avgComms,
+      mostViews: props.state.paintings[mostViews],
+      avgViews: avgViews,
+      mostFaves: props.state.paintings[mostFaves],
+      avgFaves: avgFaves,
+      mostLiked: props.state.paintings[mostLiked],
+      avgLikes: avgLikes
+    });
   },
 
   render: function render() {
