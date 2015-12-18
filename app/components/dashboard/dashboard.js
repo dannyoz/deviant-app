@@ -1,9 +1,9 @@
-import React      from "../../node_modules/react/react";
-import apiService from '../services/apiService';
+import React      from "../../../node_modules/react/react";
+import apiService from '../../services/apiService';
 import MainPanel  from './mainPanel';
 import Sidebar    from './sidebar';
-import AppStore   from '../flux/appStore';
-import AppActions from '../flux/appActions';
+import AppStore   from '../../flux/appStore';
+import AppActions from '../../flux/appActions';
 
 var Dashboard = React.createClass({
 
@@ -11,18 +11,19 @@ var Dashboard = React.createClass({
 		return {
 			userData   : {},
 			paintings  : [],
-      views      : [],
-      favourites : [],
-      comments   : [],
+		    views      : [],
+		    favourites : [],
+		    comments   : [],
 			percs      : [],
 			hasStats   : false
 		}
 	},
 
 	statsHandler(stat){
+		
 		AppStore.addStat("comments",stat.comments);
-    AppStore.addStat("favourites",stat.favorites);
-    AppStore.addStat("views",stat.views);
+	    AppStore.addStat("favourites",stat.favorites);
+	    AppStore.addStat("views",stat.views);
 		AppStore.addStat("percs",stat.perc);
 
 		if(AppStore.getStats('comments').length == this.state.paintings.length){
@@ -34,8 +35,8 @@ var Dashboard = React.createClass({
 
 			this.setState({
 				views : views,
-	      favourites : favourites,
-	      comments :comments,
+			    favourites : favourites,
+			    comments :comments,
 				percs : percs
 			});
 		}

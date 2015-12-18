@@ -7,11 +7,11 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _node_modulesReactReact = require("../../node_modules/react/react");
+var _node_modulesReactReact = require("../../../node_modules/react/react");
 
 var _node_modulesReactReact2 = _interopRequireDefault(_node_modulesReactReact);
 
-var _servicesApiService = require('../services/apiService');
+var _servicesApiService = require('../../services/apiService');
 
 var _servicesApiService2 = _interopRequireDefault(_servicesApiService);
 
@@ -23,11 +23,11 @@ var _sidebar = require('./sidebar');
 
 var _sidebar2 = _interopRequireDefault(_sidebar);
 
-var _fluxAppStore = require('../flux/appStore');
+var _fluxAppStore = require('../../flux/appStore');
 
 var _fluxAppStore2 = _interopRequireDefault(_fluxAppStore);
 
-var _fluxAppActions = require('../flux/appActions');
+var _fluxAppActions = require('../../flux/appActions');
 
 var _fluxAppActions2 = _interopRequireDefault(_fluxAppActions);
 
@@ -47,6 +47,7 @@ var Dashboard = _node_modulesReactReact2['default'].createClass({
 	},
 
 	statsHandler: function statsHandler(stat) {
+
 		_fluxAppStore2['default'].addStat("comments", stat.comments);
 		_fluxAppStore2['default'].addStat("favourites", stat.favorites);
 		_fluxAppStore2['default'].addStat("views", stat.views);
@@ -101,7 +102,7 @@ var Dashboard = _node_modulesReactReact2['default'].createClass({
 exports['default'] = Dashboard;
 module.exports = exports['default'];
 
-},{"../../node_modules/react/react":169,"../flux/appActions":7,"../flux/appStore":9,"../services/apiService":10,"./mainPanel":3,"./sidebar":5}],2:[function(require,module,exports){
+},{"../../../node_modules/react/react":169,"../../flux/appActions":7,"../../flux/appStore":9,"../../services/apiService":10,"./mainPanel":3,"./sidebar":5}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -110,7 +111,7 @@ Object.defineProperty(exports, "__esModule", {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _node_modulesReactReact = require("../../node_modules/react/react");
+var _node_modulesReactReact = require("../../../node_modules/react/react");
 
 var _node_modulesReactReact2 = _interopRequireDefault(_node_modulesReactReact);
 
@@ -201,7 +202,7 @@ var HighScores = _node_modulesReactReact2["default"].createClass({
 exports["default"] = HighScores;
 module.exports = exports["default"];
 
-},{"../../node_modules/react/react":169}],3:[function(require,module,exports){
+},{"../../../node_modules/react/react":169}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -210,11 +211,11 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _node_modulesReactReact = require("../../node_modules/react/react");
+var _node_modulesReactReact = require("../../../node_modules/react/react");
 
 var _node_modulesReactReact2 = _interopRequireDefault(_node_modulesReactReact);
 
-var _fluxAppActions = require('../flux/appActions');
+var _fluxAppActions = require('../../flux/appActions');
 
 var _fluxAppActions2 = _interopRequireDefault(_fluxAppActions);
 
@@ -264,7 +265,7 @@ var MainPanel = _node_modulesReactReact2['default'].createClass({
 exports['default'] = MainPanel;
 module.exports = exports['default'];
 
-},{"../../node_modules/react/react":169,"../flux/appActions":7,"./highscores":2,"./painting":4}],4:[function(require,module,exports){
+},{"../../../node_modules/react/react":169,"../../flux/appActions":7,"./highscores":2,"./painting":4}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -273,7 +274,7 @@ Object.defineProperty(exports, "__esModule", {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _node_modulesReactReact = require("../../node_modules/react/react");
+var _node_modulesReactReact = require("../../../node_modules/react/react");
 
 var _node_modulesReactReact2 = _interopRequireDefault(_node_modulesReactReact);
 
@@ -327,7 +328,7 @@ var Painting = _node_modulesReactReact2["default"].createClass({
 exports["default"] = Painting;
 module.exports = exports["default"];
 
-},{"../../node_modules/react/react":169}],5:[function(require,module,exports){
+},{"../../../node_modules/react/react":169}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -336,7 +337,7 @@ Object.defineProperty(exports, "__esModule", {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _node_modulesReactReact = require("../../node_modules/react/react");
+var _node_modulesReactReact = require("../../../node_modules/react/react");
 
 var _node_modulesReactReact2 = _interopRequireDefault(_node_modulesReactReact);
 
@@ -347,7 +348,7 @@ var Sidebar = _node_modulesReactReact2["default"].createClass({
     return _node_modulesReactReact2["default"].createElement(
       "div",
       { id: "sidebar" },
-      "derp"
+      "No to derp"
     );
   }
 });
@@ -355,7 +356,7 @@ var Sidebar = _node_modulesReactReact2["default"].createClass({
 exports["default"] = Sidebar;
 module.exports = exports["default"];
 
-},{"../../node_modules/react/react":169}],6:[function(require,module,exports){
+},{"../../../node_modules/react/react":169}],6:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -364,13 +365,13 @@ var _node_modulesReactReact = require("../node_modules/react/react");
 
 var _node_modulesReactReact2 = _interopRequireDefault(_node_modulesReactReact);
 
-var _componentsDashboard = require('./components/dashboard');
+var _componentsDashboardDashboard = require('./components/dashboard/dashboard');
 
-var _componentsDashboard2 = _interopRequireDefault(_componentsDashboard);
+var _componentsDashboardDashboard2 = _interopRequireDefault(_componentsDashboardDashboard);
 
-_node_modulesReactReact2['default'].render(_node_modulesReactReact2['default'].createElement(_componentsDashboard2['default'], null), document.getElementById('dashboard'));
+_node_modulesReactReact2['default'].render(_node_modulesReactReact2['default'].createElement(_componentsDashboardDashboard2['default'], null), document.getElementById('dashboard'));
 
-},{"../node_modules/react/react":169,"./components/dashboard":1}],7:[function(require,module,exports){
+},{"../node_modules/react/react":169,"./components/dashboard/dashboard":1}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

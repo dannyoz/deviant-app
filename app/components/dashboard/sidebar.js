@@ -1,10 +1,10 @@
-import React from "../../node_modules/react/react";
+import React from "../../../node_modules/react/react";
 let Sidebar = React.createClass({
 
   render () {
     return(
       <div id="sidebar">
-        derp
+        No to derp
       </div>
     )
   }
