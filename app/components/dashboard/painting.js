@@ -1,4 +1,4 @@
-import React from "../../node_modules/react/react";
+import React from "../../../node_modules/react/react";
 
 var Painting = React.createClass({
 

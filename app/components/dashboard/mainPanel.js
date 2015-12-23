@@ -1,5 +1,5 @@
-import React      from "../../node_modules/react/react";
-import AppActions from '../flux/appActions';
+import React      from "../../../node_modules/react/react";
+import AppActions from '../../flux/appActions';
 import Painting   from './painting';
 import HighScores from './highscores';
 
